@@ -38,6 +38,6 @@ class Database:
         data = dumps(data)
 
         await self.execute(
-            "INSERT INTO Events (event_type, event_data, channel, category, user) VALUES ($1, $2, $3, $4, $5, $6);",
+            "INSERT INTO Events (event_type, event_data, channel_id, category_id, user_id, associated_id) VALUES ($1, $2, $3, $4, $5, $6);",
             type, data, channel, category, user, event_id,
         )
