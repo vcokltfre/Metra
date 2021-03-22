@@ -5,5 +5,6 @@ CREATE TABLE IF NOT EXISTS Events (
     channel_id      BIGINT DEFAULT NULL,
     category_id     BIGINT DEFAULT NULL,
     user_id         BIGINT DEFAULT NULL,
+    associated_id   BIGINT DEFAULT NULL,
     created_at      TIMESTAMP NOT NULL DEFAULT NOW()
 );

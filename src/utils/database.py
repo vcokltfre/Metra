@@ -34,10 +34,10 @@ class Database:
         async with self.pool.acquire() as conn:
             return await conn.fetch(query, *args)
 
-    async def create_event(self, type: str, data: dict, channel: int = None, category: int = None, user: int = None):
+    async def create_event(self, type: str, data: dict, channel: int = None, category: int = None, user: int = None, event_id: int = None):
         data = dumps(data)
 
         await self.execute(
-            "INSERT INTO Events (event_type, event_data, channel, category, user) VALUES ($1, $2, $3, $4, $5);",
-            type, data, channel, category, user,
+            "INSERT INTO Events (event_type, event_data, channel, category, user) VALUES ($1, $2, $3, $4, $5, $6);",
+            type, data, channel, category, user, event_id,
         )
