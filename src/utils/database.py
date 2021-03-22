@@ -1,5 +1,6 @@
 from asyncpg import create_pool
 from os import getenv
+from json import dumps
 
 from loguru import logger
 
@@ -32,3 +33,11 @@ class Database:
     async def fetch(self, query: str, *args):
         async with self.pool.acquire() as conn:
             return await conn.fetch(query, *args)
+
+    async def create_event(self, type: str, data: dict, channel: int = None, category: int = None, user: int = None):
+        data = dumps(data)
+
+        await self.execute(
+            "INSERT INTO Events (event_type, event_data, channel, category, user) VALUES ($1, $2, $3, $4, $5);",
+            type, data, channel, category, user,
+        )
